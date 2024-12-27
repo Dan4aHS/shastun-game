@@ -17,6 +17,12 @@ func TestRemoveOne(t *testing.T) {
 	assertIntSlices(t, c.Current(), []int{1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12})
 }
 
+func TestRemoveTwo(t *testing.T) {
+	c := NewChips()
+	c.RemoveMulti(3, 8)
+	assertIntSlices(t, c.Current(), []int{1, 2, 4, 5, 6, 7, 9, 10, 11, 12})
+}
+
 func assertIntSlices(t *testing.T, actual, expected []int) {
 	if len(actual) != len(expected) {
 		t.Errorf("actual %v != expected %v", actual, expected)
