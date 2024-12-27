@@ -33,6 +33,10 @@ func (c *Chips) Has(chip int) bool {
 	return ok
 }
 
+func (c *Chips) HasMulti(chip1, chip2 int) bool {
+	return c.Has(chip1) && c.Has(chip2)
+}
+
 func (c *Chips) RemoveMulti(chip1, chip2 int) {
 	delete(c.current, chip1)
 	delete(c.current, chip2)

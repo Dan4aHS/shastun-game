@@ -29,6 +29,23 @@ func TestHasWithoutRemoves(t *testing.T) {
 	assertBool(t, hv, true)
 }
 
+func TestHasAfterRemove(t *testing.T) {
+	c := NewChips()
+	c.Remove(4)
+	hv := c.Has(4)
+	assertBool(t, hv, false)
+}
+
+func TestHasMultiple(t *testing.T) {
+	c := NewChips()
+	hv := c.Has(3)
+	assertBool(t, hv, true)
+
+	c.RemoveMulti(3, 8)
+	hv = c.HasMulti(3, 8)
+	assertBool(t, hv, false)
+}
+
 func assertIntSlices(t *testing.T, actual, expected []int) {
 	if len(actual) != len(expected) {
 		t.Errorf("actual %v != expected %v", actual, expected)
