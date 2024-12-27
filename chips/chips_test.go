@@ -2,11 +2,17 @@ package chips
 
 import "testing"
 
-func TestCurrentChipsWithoutMoves(t *testing.T) {
+func TestCurrentWithoutMoves(t *testing.T) {
 	c := NewChips()
 	res := c.Current()
 
 	assertIntSlices(t, res, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12})
+}
+
+func TestRemoveOne(t *testing.T) {
+	c := NewChips()
+
+	c.Remove(3)
 }
 
 func assertIntSlices(t *testing.T, actual, expected []int) {

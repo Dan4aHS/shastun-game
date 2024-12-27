@@ -1,15 +1,29 @@
 package chips
 
 type Chips struct {
-	current []int
+	current map[int]struct{}
 }
 
 func NewChips() *Chips {
+	newMap := make(map[int]struct{})
+	for i := 1; i <= 12; i++ {
+		newMap[i] = struct{}{}
+	}
+
 	return &Chips{
-		current: []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12},
+		current: newMap,
 	}
 }
 
 func (c *Chips) Current() []int {
-	return c.current
+	result := make([]int, 0, len(c.current))
+	for k := range c.current {
+		result = append(result, k)
+	}
+
+	return result
+}
+
+func (c *Chips) Remove(chip int) {
+	delete(c.current, chip)
 }
