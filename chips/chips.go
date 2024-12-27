@@ -28,6 +28,11 @@ func (c *Chips) Remove(chip int) {
 	delete(c.current, chip)
 }
 
+func (c *Chips) Has(chip int) bool {
+	_, ok := c.current[chip]
+	return ok
+}
+
 func (c *Chips) RemoveMulti(chip1, chip2 int) {
 	delete(c.current, chip1)
 	delete(c.current, chip2)
