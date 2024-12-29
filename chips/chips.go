@@ -1,5 +1,10 @@
 package chips
 
+import (
+	"fmt"
+	"sort"
+)
+
 type Chips struct {
 	current map[int]struct{}
 }
@@ -51,4 +56,10 @@ func (c *Chips) HasMulti(chip1, chip2 int) bool {
 func (c *Chips) RemoveMulti(chip1, chip2 int) {
 	delete(c.current, chip1)
 	delete(c.current, chip2)
+}
+
+func (c *Chips) String() string {
+	s := c.Current()
+	sort.Ints(s)
+	return fmt.Sprintf("%v", s)
 }

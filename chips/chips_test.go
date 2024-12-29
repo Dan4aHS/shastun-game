@@ -53,6 +53,30 @@ func TestHasMultiple(t *testing.T) {
 	assertBool(t, hv, false)
 }
 
+func TestString(t *testing.T) {
+	tests := []struct {
+		chips    []int
+		expected string
+	}{
+		{
+			[]int{1, 10, 5},
+			"[1 5 10]",
+		},
+		{
+			[]int{8, 4, 6},
+			"[4 6 8]",
+		},
+	}
+
+	for _, test := range tests {
+		c := NewChipsFromSlice(test.chips)
+
+		if c.String() != test.expected {
+			t.Errorf("Expected: %s, got: %s", test.expected, c.String())
+		}
+	}
+}
+
 func assertIntSlices(t *testing.T, actual, expected []int) {
 	if len(actual) != len(expected) {
 		t.Errorf("actual %v != expected %v", actual, expected)
