@@ -1,6 +1,8 @@
 package time_rater
 
-import "shastun-game/chips"
+import (
+	"shastun-game/chips"
+)
 
 type TimeRater struct {
 	chips *chips.Chips
@@ -11,21 +13,27 @@ func (r *TimeRater) RateTime() float64 {
 		return 0
 	}
 
-	return r.calculateChanceToGetNumber(r.chips.Current()[0])
+	if len(r.chips.Current()) == 1 {
+		return r.calculateChanceToGetNumber(r.chips.Current()[0])
+	}
+
+	return r.complexCalculateTime()
+}
+
+func (r *TimeRater) complexCalculateTime() float64 {
+	return 5
 }
 
 func (r *TimeRater) calculateChanceToGetNumber(n int) float64 {
 	var goods float64
 
-	for i := 1; i <= 6; i++ {
-		for j := 1; j <= 6; j++ {
-			if i+j == n {
-				goods++
-			}
+	for i, j := range DiceIterator() {
+		if i+j == n {
+			goods++
+		}
 
-			if i == j && i == n {
-				goods++
-			}
+		if i == j && i == n {
+			goods++
 		}
 	}
 
