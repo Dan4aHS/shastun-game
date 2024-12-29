@@ -32,6 +32,7 @@ func TestTimeRaterOnOnlyOneChipLeft(t *testing.T) {
 		{11, 18},
 		{12, 36},
 	}
+
 	for _, tt := range tests {
 		ch := chips.NewChipsFromSlice([]int{tt.chip})
 		tr := NewTimeRater(ch)
@@ -39,7 +40,6 @@ func TestTimeRaterOnOnlyOneChipLeft(t *testing.T) {
 		res := tr.RateTime()
 		assertFloat(t, tt.time, res)
 	}
-
 }
 
 func assertInt(t *testing.T, expected, actual int) {
