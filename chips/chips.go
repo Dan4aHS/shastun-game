@@ -15,6 +15,17 @@ func NewChips() *Chips {
 	}
 }
 
+func NewChipsFromSlice(chips []int) *Chips {
+	newMap := make(map[int]struct{})
+	for _, chip := range chips {
+		newMap[chip] = struct{}{}
+	}
+
+	return &Chips{
+		current: newMap,
+	}
+}
+
 func (c *Chips) Current() []int {
 	result := make([]int, 0, len(c.current))
 	for k := range c.current {
