@@ -6,36 +6,50 @@ import (
 )
 
 func TestTimeRaterOnZeroChips(t *testing.T) {
-	ch := chips.NewChips()
-	ch.RemoveMulti(1, 2)
-	ch.RemoveMulti(3, 4)
-	ch.RemoveMulti(5, 6)
-	ch.RemoveMulti(7, 8)
-	ch.RemoveMulti(9, 10)
-	ch.RemoveMulti(11, 12)
+	ch := chips.NewChipsFromSlice([]int{})
 	tr := NewTimeRater(ch)
 
 	res := tr.RateTime()
 
-	assertInt(t, 0, res)
+	assertFloat(t, 0, res)
 }
 
-func TestTimeRaterOnOnlyTwelveLeft(t *testing.T) {
-	ch := chips.NewChips()
-	ch.RemoveMulti(1, 2)
-	ch.RemoveMulti(3, 4)
-	ch.RemoveMulti(5, 6)
-	ch.RemoveMulti(7, 8)
-	ch.RemoveMulti(9, 10)
-	ch.Remove(11)
-	tr := NewTimeRater(ch)
+func TestTimeRaterOnOnlyOneChipLeft(t *testing.T) {
+	tests := []struct {
+		chip int
+		time float64
+	}{
+		{1, 36},
+		{2, 18},
+		{3, 12},
+		{4, 9},
+		{5, 7.2},
+		{6, 6},
+		{7, 6},
+		{8, 7.2},
+		{9, 9},
+		{10, 12},
+		{11, 18},
+		{12, 36},
+	}
+	for _, tt := range tests {
+		ch := chips.NewChipsFromSlice([]int{tt.chip})
+		tr := NewTimeRater(ch)
 
-	res := tr.RateTime()
-	assertInt(t, 0, res)
+		res := tr.RateTime()
+		assertFloat(t, tt.time, res)
+	}
+
 }
 
 func assertInt(t *testing.T, expected, actual int) {
 	if expected != actual {
 		t.Errorf("Expected: %d, actual: %d", expected, actual)
+	}
+}
+
+func assertFloat(t *testing.T, expected, actual float64) {
+	if expected != actual {
+		t.Errorf("Expected: %f, actual: %f", expected, actual)
 	}
 }
