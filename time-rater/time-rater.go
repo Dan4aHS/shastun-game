@@ -28,11 +28,7 @@ func (r *TimeRater) calculateChanceToGetNumber(n int) float64 {
 	var goods float64
 
 	for i, j := range DiceIterator() {
-		if i+j == n {
-			goods++
-		}
-
-		if i == j && i == n {
+		if (i+j == n) || (i == j && i == n) {
 			goods++
 		}
 	}
