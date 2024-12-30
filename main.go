@@ -11,7 +11,7 @@ func main() {
 	testSum, smartSum := 0, 0
 
 	for i := 0; i < runCount; i++ {
-		g := game.NewGame()
+		g := game.NewGame([]int{1, 4, 5, 3, 2, 6, 10})
 
 		testRes, smartRes := g.Play()
 		testSum += testRes

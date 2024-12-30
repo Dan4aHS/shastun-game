@@ -14,10 +14,18 @@ type Game struct {
 	smartMoves int
 }
 
-func NewGame() *Game {
+func NewGame(testCase []int) *Game {
+	if len(testCase) == 0 {
+		return &Game{
+			testChips:  chips.NewChips(),
+			smartChips: chips.NewChips(),
+			testMoves:  0,
+			smartMoves: 0,
+		}
+	}
 	return &Game{
-		testChips:  chips.NewChips(),
-		smartChips: chips.NewChips(),
+		testChips:  chips.NewChipsFromSlice(testCase),
+		smartChips: chips.NewChipsFromSlice(testCase),
 		testMoves:  0,
 		smartMoves: 0,
 	}
