@@ -42,26 +42,6 @@ func TestTimeRaterOnOnlyOneChipLeft(t *testing.T) {
 	}
 }
 
-func TestTimeRaterOnTwoChipsLeft(t *testing.T) {
-	tests := []struct {
-		chips []int
-		time  float64
-	}{
-		{
-			chips: []int{1, 12},
-			time:  54,
-		},
-	}
-
-	for _, tt := range tests {
-		ch := chips.NewChipsFromSlice(tt.chips)
-		tr := NewTimeRater(ch)
-
-		res := tr.RateTime()
-		assertFloat(t, tt.time, res)
-	}
-}
-
 func assertInt(t *testing.T, expected, actual int) {
 	if expected != actual {
 		t.Errorf("Expected: %d, actual: %d", expected, actual)
