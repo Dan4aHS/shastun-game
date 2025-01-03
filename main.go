@@ -6,16 +6,22 @@ import (
 	"shastun-game/game"
 	time_rater "shastun-game/time-rater"
 	"sync"
+	"time"
 )
 
 const (
-	runnersCount  = 100
-	runChunkCount = 10000
+	runnersCount  = 50000
+	runChunkCount = 200
 )
 
 func main() {
+	start := time.Now()
+	defer func() {
+		fmt.Printf("elapsed: %v\n", time.Since(start))
+	}()
+
 	totalGames := runChunkCount * runnersCount
-	fmt.Printf("Total Games: %d\n", totalGames)
+	fmt.Printf("Total Games: %.2e\n", float64(totalGames))
 
 	testSum, smartSum := 0, 0
 	testChips := []int{1, 2, 3, 4, 11, 12}
@@ -51,8 +57,8 @@ func main() {
 		smartSum += smartPartial
 	}
 
-	fmt.Printf("test avg: %f\n", float64(testSum)/float64(runnersCount*runChunkCount))
-	fmt.Printf("smart avg: %f\n", float64(smartSum)/float64(runnersCount*runChunkCount))
+	fmt.Printf("test avg: %f\n", float64(testSum)/float64(totalGames))
+	fmt.Printf("smart avg: %f\n", float64(smartSum)/float64(totalGames))
 }
 
 func runAsyncGames(chips []int, count int, testCh, smartCh chan int) {
