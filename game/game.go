@@ -60,11 +60,14 @@ func (g *Game) Play() (int, int) {
 
 func (g *Game) TestMove(first, second int) {
 	switch {
-	case g.testChips.Has(first + second):
+	case g.testChips.HasMulti(first, second) && (first < 2 || second < 2):
+		g.testChips.RemoveMulti(first, second)
+	case g.testChips.Has(first+second) && (first+second > 8):
 		g.testChips.Remove(first + second)
 	case g.testChips.HasMulti(first, second):
 		g.testChips.RemoveMulti(first, second)
-
+	case g.testChips.Has(first + second):
+		g.testChips.Remove(first + second)
 	}
 }
 
